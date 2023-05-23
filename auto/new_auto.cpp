@@ -1,6 +1,15 @@
 #include <iostream>
 #include <typeinfo>
 using namespace std;
+template <auto N>
+void f()
+{
+    cout << N << endl;
+}
+auto sum(long double a1, long double a2)
+{
+    return a1 + a2;
+}
 
 int main(int argc, char const* argv[])
 {
@@ -49,5 +58,18 @@ int main(int argc, char const* argv[])
     cout << typeid(a_4_2).name() << endl;
     // cout << typeid(a_4_3).name() << endl;
 
-    return 0;
+    cout << "------------3.4---------------------" << endl;
+
+    cout << "return by auto = " << sum(1.2, 1.3) << endl;
+
+    cout << "------------3.5---------------------" << endl;
+
+    auto l = [](auto& i) -> auto& { return i; };
+    auto x1 = 5;
+    auto& x2 = l(x1);
+    cout << "return by auto and reference in lambda = " << x2 << endl;
+
+    cout << "------------3.6---------------------" << endl;
+    f<5>(); // N为int类型
+    f<'c'>();
 }
